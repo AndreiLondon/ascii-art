@@ -15,22 +15,22 @@ func parseTemplate(s string) map[rune][][]rune {
 	for _, char := range s {
 		if char != 10 && char != 13 {
 			// We're adding a char to this rowData if the char != 10
-			// 10 - "LF Line Feed" moves the cursor down to the next line without returning to the beginning of the line.
-			// 13 -"CR Carriege Return" moves the cursor to the beginning of the line without advancing to the next line.
 			rowData = append(rowData, char)
+
 		}
 		// Adding the rowData to the two dimen. array called data
-
 		if char == 10 || char == 13 {
 			//We only add rowData to data if rowData is not empty
 			if len(rowData) > 1 {
 				data = append(data, rowData)
 				rowData = []rune{}
+
 			}
 			if len(data) == 8 {
 				myMap[rune(ascii)] = data
 				ascii++
 				data = [][]rune{}
+				//fmt.Println(myMap)
 
 			}
 
@@ -52,7 +52,7 @@ func printMessage(s string, myMap map[rune][][]rune) {
 		}
 		//1st loop is for counting the lines
 		for i := 0; i < 8; i++ {
-			//2nd loop is for grabbing the each char from the string
+			//2nd loop is for grabbing each char from the string
 			for _, ch := range v {
 				//do whatever you want to handle errors - this means this wasn't a string
 				if data, ok := myMap[ch]; ok {
